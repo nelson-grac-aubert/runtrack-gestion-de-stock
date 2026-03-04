@@ -30,7 +30,7 @@ class MainMenu:
         ttk.Button(
             frame,
             text="View Products",
-            bootstyle=INFO,
+            bootstyle=PRIMARY,
             command=lambda: self.open_blank_window("View Products")
         ).pack(fill=X, pady=10)
 
@@ -44,7 +44,7 @@ class MainMenu:
         ttk.Button(
             frame,
             text="Edit Categories",
-            bootstyle=SECONDARY,
+            bootstyle=PRIMARY,
             command=lambda: self.open_blank_window("Edit Categories")
         ).pack(fill=X, pady=10)
 

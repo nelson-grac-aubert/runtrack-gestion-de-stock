@@ -41,7 +41,6 @@ class StockManager:
                     price=price,
                     quantity=quantity,
                     id_category=id_category,
-                    id=product_id
                 )
             )
 
@@ -92,14 +91,13 @@ class StockManager:
         if row is None:
             return None
 
-        product_id, name, description, price, quantity, id_category = row
+        id, name, description, price, quantity, id_category = row
         return Product(
             name=name,
             description=description,
             price=price,
             quantity=quantity,
             id_category=id_category,
-            id=product_id
         )
 
     def get_category_by_id(self, category_id):

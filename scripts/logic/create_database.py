@@ -29,7 +29,7 @@ def create_tables():
             host="localhost",
             user="root",
             password="Misstouille83!sql",
-            database="myzoo"
+            database="store"
         )
         cursor = connection.cursor()
 

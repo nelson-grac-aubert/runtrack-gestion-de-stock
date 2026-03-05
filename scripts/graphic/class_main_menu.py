@@ -1,5 +1,8 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+from scripts.graphic.class_category_menu import CategoryMenu
+from scripts.graphic.class_product_menu import ProductMenu
+
 
 
 class MainMenu:
@@ -13,6 +16,11 @@ class MainMenu:
 
         self.create_widgets()
 
+    def open_category_menu(self):
+        new_window = ttk.Toplevel(self.root)
+        CategoryMenu(new_window)
+
+
     def create_widgets(self):
         """
         Create the main menu UI.
@@ -20,6 +28,7 @@ class MainMenu:
         frame = ttk.Frame(self.root, padding=40)
         frame.pack(fill=BOTH, expand=True)
 
+        # Title
         title = ttk.Label(
             frame,
             text="Supermarket Manager 3000",
@@ -27,6 +36,7 @@ class MainMenu:
         )
         title.pack(pady=20)
 
+        # View Products
         ttk.Button(
             frame,
             text="View Products",
@@ -34,20 +44,23 @@ class MainMenu:
             command=lambda: self.open_blank_window("View Products")
         ).pack(fill=X, pady=10)
 
+        # Edit Products
         ttk.Button(
             frame,
             text="Edit Products",
             bootstyle=PRIMARY,
-            command=lambda: self.open_blank_window("Edit Products")
+            command=lambda: ProductMenu(ttk.Toplevel(self.root))
         ).pack(fill=X, pady=10)
 
+        # Edit categories
         ttk.Button(
             frame,
             text="Edit Categories",
             bootstyle=PRIMARY,
-            command=lambda: self.open_blank_window("Edit Categories")
+            command=lambda: self.open_category_menu()
         ).pack(fill=X, pady=10)
 
+        # Quit
         ttk.Button(
             frame,
             text="Quit",

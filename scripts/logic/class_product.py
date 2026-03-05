@@ -26,15 +26,15 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.id_category = id_category
+        
+        self.insert_into_database()
 
     def insert_into_database(self):
         """
-        Insert the product into the database.
-
-        :return: None
+        Insert the product into the database and store the generated ID.
         """
         database = access_database("store")
-        cursor = point_cursor(database)
+        cursor = point_cursor(database)  # must be a normal cursor, not dictionary=True
 
         query = """
             INSERT INTO product (name, description, price, quantity, id_category)
@@ -52,10 +52,14 @@ class Product:
         cursor.execute(query, values)
         database.commit()
 
-        # Store the generated ID inside the object
+        # Retrieve auto-incremented ID
         self.id = cursor.lastrowid
 
+        if self.id is None:
+            raise RuntimeError("Failed to retrieve auto-incremented ID. Check cursor type and DB schema.")
+
         close_everything_properly(cursor, database)
+
 
     def delete_from_database(self):
         """
